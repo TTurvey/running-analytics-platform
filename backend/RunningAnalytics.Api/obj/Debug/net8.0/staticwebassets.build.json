@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "ZJ/8NUH+ktUrLvXVNN/xqvfcNsm4mtrNXWahZlZCOEc=",
+  "Source": "RunningAnalytics.Api",
+  "BasePath": "_content/RunningAnalytics.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
