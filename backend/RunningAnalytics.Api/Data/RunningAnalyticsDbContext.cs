@@ -10,4 +10,6 @@ public class RunningAnalyticsDbContext : DbContext
         : base(options)
     {
     }
+
+    public DbSet<User> Users => Set<User>();
 }
