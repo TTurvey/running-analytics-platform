@@ -26,4 +26,26 @@ public class UsersService(ApplicationDbContext context) : IUsersService
         return user;
     }
 
+    public async Task<bool> UpdateAsync(Guid id, User user)
+    {
+        var existingUser = await context.Users.FindAsync(id);
+        if (existingUser == null) return false;
+
+        existingUser.Email = user.Email;
+        existingUser.PasswordHash = user.PasswordHash;
+        existingUser.Name = user.Name;
+
+        await context.SaveChangesAsync();
+        return true;
+    }
+
+    public async Task<bool> DeleteAsync(Guid id)
+    {
+        var userToDelete = await context.Users.FindAsync(id);
+        if (userToDelete == null) return false;
+
+        context.Users.Remove(userToDelete);
+        await context.SaveChangesAsync();
+        return true;
+    }
 }

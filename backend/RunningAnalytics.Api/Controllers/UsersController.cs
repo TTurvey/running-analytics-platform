@@ -31,7 +31,20 @@ public class UsersController(IUsersService service) : ControllerBase
     public async Task<ActionResult<User>> Add(User user)
     {
         await service.AddAsync(user);
-
         return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
+    }
+
+    [HttpPut("{id:guid}")]
+    public async Task<ActionResult> Update(Guid id, User user)
+    {
+        var updated = await service.UpdateAsync(id, user);
+        return updated ? NoContent() : NotFound("User with the given Id was not found.");
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<ActionResult> Delete(Guid id)
+    {
+        var deleted = await service.DeleteAsync(id);
+        return deleted ? NoContent() : NotFound("User with the given Id was not found.");
     }
 }
