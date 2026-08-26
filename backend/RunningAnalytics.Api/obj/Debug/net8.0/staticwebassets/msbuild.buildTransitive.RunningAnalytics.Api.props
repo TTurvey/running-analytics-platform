@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../buildMultiTargeting/RunningAnalytics.Api.props" />
-</Project>
