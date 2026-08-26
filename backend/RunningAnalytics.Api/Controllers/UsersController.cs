@@ -1,69 +1,37 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using RunningAnalytics.Api.Data;
 using RunningAnalytics.Api.Models;
+using RunningAnalytics.Api.Services;
 
 namespace RunningAnalytics.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UsersController : ControllerBase
+public class UsersController(IUsersService service) : ControllerBase
 {
-    private readonly RunningAnalyticsDbContext _dbContext;
-
-    public UsersController(RunningAnalyticsDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
-
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+    public async Task<ActionResult<List<User>>> GetAll()
     {
-        var users = await _dbContext.Users
-            .OrderBy(u => u.CreatedAt)
-            .ToListAsync();
-
+        var users = await service.GetAllAsync();
         return Ok(users);
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<ActionResult<User>> GetUser(Guid id)
+    public async Task<ActionResult<User>> Get(Guid id)
     {
-        var user = await _dbContext.Users.FindAsync(id);
+        var user = await service.GetByIdAsync(id);
+        if (user is null)
+        {
+            return NotFound("User with the given Id was not found.");
+        }
 
-        return user is null ? NotFound() : Ok(user);
+        return Ok(user);
     }
 
     [HttpPost]
-    public async Task<ActionResult<User>> CreateUser(UserCreateRequest request)
+    public async Task<ActionResult<User>> Add(User user)
     {
-        if (string.IsNullOrWhiteSpace(request.Email))
-        {
-            return BadRequest("Email is required.");
-        }
+        await service.AddAsync(user);
 
-        if (string.IsNullOrWhiteSpace(request.Name))
-        {
-            return BadRequest("Name is required.");
-        }
-
-        var user = new User
-        {
-            Id = Guid.NewGuid(),
-            Email = request.Email,
-            PasswordHash = request.PasswordHash,
-            Name = request.Name,
-            CreatedAt = DateTime.UtcNow
-        };
-
-        _dbContext.Users.Add(user);
-        await _dbContext.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+        return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
     }
 }
-
-public record UserCreateRequest(
-    string Email,
-    string Name,
-    string PasswordHash = "");

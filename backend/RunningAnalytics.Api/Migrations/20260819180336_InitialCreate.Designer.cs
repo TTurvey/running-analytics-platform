@@ -11,7 +11,7 @@ using RunningAnalytics.Api.Data;
 
 namespace RunningAnalytics.Api.Migrations
 {
-    [DbContext(typeof(RunningAnalyticsDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20260819180336_InitialCreate")]
     partial class InitialCreate
     {

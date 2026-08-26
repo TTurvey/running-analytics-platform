@@ -1,13 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using RunningAnalytics.Api.Data;
+using RunningAnalytics.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<RunningAnalyticsDbContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

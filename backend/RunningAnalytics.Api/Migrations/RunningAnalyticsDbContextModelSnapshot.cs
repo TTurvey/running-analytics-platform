@@ -10,7 +10,7 @@ using RunningAnalytics.Api.Data;
 
 namespace RunningAnalytics.Api.Migrations
 {
-    [DbContext(typeof(RunningAnalyticsDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     partial class RunningAnalyticsDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
