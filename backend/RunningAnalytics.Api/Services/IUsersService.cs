@@ -1,12 +1,12 @@
-using RunningAnalytics.Api.Models;
+using RunningAnalytics.Api.dtos;
 
 namespace RunningAnalytics.Api.Services;
 
 public interface IUsersService
 {
-    Task<List<User>> GetAllAsync();
-    Task<User?> GetByIdAsync(Guid? id);
-    Task<User> AddAsync(User user);
-    Task<bool> UpdateAsync(Guid id, User user);
+    Task<List<UserResponse>> GetAllAsync();
+    Task<UserResponse?> GetByIdAsync(Guid? id);
+    Task<UserResponse> AddAsync(CreateUserRequest obj);
+    Task<bool> UpdateAsync(Guid id, UpdateUserRequest request);
     Task<bool> DeleteAsync(Guid id);
 }

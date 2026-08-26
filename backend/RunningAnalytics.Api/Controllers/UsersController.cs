@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using RunningAnalytics.Api.Models;
 using RunningAnalytics.Api.Services;
+using RunningAnalytics.Api.dtos;
 
 namespace RunningAnalytics.Api.Controllers;
 
@@ -9,14 +9,14 @@ namespace RunningAnalytics.Api.Controllers;
 public class UsersController(IUsersService service) : ControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<List<User>>> GetAll()
+    public async Task<ActionResult<List<UserResponse>>> GetAll()
     {
         var users = await service.GetAllAsync();
         return Ok(users);
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<ActionResult<User>> Get(Guid id)
+    public async Task<ActionResult<UserResponse>> Get(Guid id)
     {
         var user = await service.GetByIdAsync(id);
         if (user is null)
@@ -28,16 +28,16 @@ public class UsersController(IUsersService service) : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<User>> Add(User user)
+    public async Task<ActionResult<UserResponse>> Add(CreateUserRequest request)
     {
-        await service.AddAsync(user);
-        return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
+        var createdUser = await service.AddAsync(request);
+        return CreatedAtAction(nameof(Get), new { id = createdUser.Id }, createdUser);
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<ActionResult> Update(Guid id, User user)
+    public async Task<ActionResult> Update(Guid id, UpdateUserRequest request)
     {
-        var updated = await service.UpdateAsync(id, user);
+        var updated = await service.UpdateAsync(id, request);
         return updated ? NoContent() : NotFound("User with the given Id was not found.");
     }
 
