@@ -1,4 +1,4 @@
-namespace RunningAnalytics.Api.dtos;
+namespace RunningAnalytics.Application.DTOs;
 
 public class CreateUserRequest
 {

@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Metadata;
+using RunningAnalytics.Infrastructure.Data;
 
 #nullable disable
 
-namespace RunningAnalytics.Api.Migrations
+namespace RunningAnalytics.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

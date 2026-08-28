@@ -1,6 +1,6 @@
-using RunningAnalytics.Api.dtos;
+using RunningAnalytics.Application.DTOs;
 
-namespace RunningAnalytics.Api.Services;
+namespace RunningAnalytics.Application.Services;
 
 public interface IUsersService
 {

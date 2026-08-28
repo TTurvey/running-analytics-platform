@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using RunningAnalytics.Api.Models;
+using RunningAnalytics.Domain.Models;
 
-namespace RunningAnalytics.Api.Data;
+namespace RunningAnalytics.Infrastructure.Data;
 
 public class ApplicationDbContext : DbContext
 {

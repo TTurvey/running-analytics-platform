@@ -1,27 +1,43 @@
-# .NET
+# Build outputs
 **/bin/
 **/obj/
-**/.vs/
-*.user
-*.suo
-
-# Node
-**/node_modules/
-**/dist/
-**/.vite/
-
-# Environment / secrets
-.env
-.env.*
-!.env.example
 
 # VS Code
+.vs/
 .vscode/*
 !.vscode/extensions.json
 !.vscode/settings.json
+
+# Rider / IntelliJ
+.idea/
 
 # macOS
 .DS_Store
 
 # Logs
 *.log
+
+# Environment / secrets (never commit)
+**/secrets.json
+.env
+.env.*
+!.env.example
+
+# EF Core
+# Migrations are OK to commit, but snapshots sometimes contain environment-specific metadata
+**/Migrations/*ModelSnapshot.cs
+
+# App settings
+# Commit appsettings.json (safe)
+# DO NOT commit appsettings.Development.json (contains secrets)
+**/appsettings.Development.json
+
+# Dotnet tools
+*.db
+*.db-shm
+*.db-wal
+
+# Node
+**/node_modules/
+**/dist/
+**/.vite/

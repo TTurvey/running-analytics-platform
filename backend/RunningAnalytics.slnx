@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="RunningAnalytics.Api.Tests/RunningAnalytics.Api.Tests.csproj" />
+  <Project Path="RunningAnalytics.Api/RunningAnalytics.Api.csproj" />
+  <Project Path="RunningAnalytics.Application/RunningAnalytics.Application.csproj" />
+  <Project Path="RunningAnalytics.Domain/RunningAnalytics.Domain.csproj" />
+  <Project Path="RunningAnalytics.Infrastructure/RunningAnalytics.Infrastructure.csproj" />
+</Solution>
