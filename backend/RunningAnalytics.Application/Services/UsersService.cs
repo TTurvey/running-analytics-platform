@@ -24,8 +24,11 @@ public class UsersService(IUsersRepository repository) : IUsersService
     {
         var user = new User
         {
+            Id = Guid.NewGuid(),
+            Email = request.Email,
             Name = request.Name,
-            Email = request.Email
+            PasswordHash = request.PasswordHash,
+            CreatedAt = DateTime.UtcNow
         };
 
         return ToResponse(await repository.AddAsync(user));
